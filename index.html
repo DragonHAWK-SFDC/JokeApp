@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test API</title>
+    
+    
+    
+</head>
+<body>
+    
+       <p id=out> Ready for the joke? </p>
+
+    <button id="joke" onclick="joke()">Tell Joke</button> 
+    
+ 
+    
+<script>
+    function joke()
+{  
+fetch('https://sv443.net/jokeapi/v2/joke/Any', {
+        method: 'get'
+    })
+    .then(res => {
+        return res.json()
+      })
+    .then((response) => {
+        if(response.type==='single'){
+            var joke= JSON.stringify(response.joke);
+            document.getElementById("out").innerHTML = joke.split("\n");
+        }
+    else{
+        var setup= JSON.stringify(response.setup);
+        var delivery = JSON.stringify(response.delivery);
+            document.getElementById("out").innerHTML = setup + '    <br>     ' + delivery;
+        
+    }
+    })
+    
+}
+    </script>
+    
+</body>
+</html>
